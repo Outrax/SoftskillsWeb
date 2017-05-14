@@ -14,6 +14,7 @@ import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
 import Entities.User;
+import Util.Firebase;
 
 /**
  * Servlet implementation class MinServlet
@@ -46,7 +47,7 @@ public class MenuServlet extends HttpServlet {
             QName qnameport = new QName("http://Service/", "ServermanagerPort");
             Service service = Service.create(url, qname);
             ServerI s = service.getPort(qnameport,ServerI.class);
-
+            
 
 
 //out.println("<!DOCTYPE html>");
@@ -61,7 +62,7 @@ public class MenuServlet extends HttpServlet {
 //
 //out.println("</body>");
 //out.println("</html>");
-            User user = null;
+           
             
             
             
@@ -79,9 +80,14 @@ public class MenuServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+	
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
+		name = request.getParameter("name");
+		System.out.println("Navnet:" + name);
+		Firebase firebase = new Firebase();
+   	 	User user = firebase.getUser(name);
+   	  
 		//RequestDispatcher view = request.getRequestDispatcher("/Application/index.html");
         //view.forward(request, response);
 		out.println("<!DOCTYPE html>");
@@ -119,7 +125,7 @@ public class MenuServlet extends HttpServlet {
         				out.println("<ul class='user-menu'>");
         				out.println("<li class='dropdown pull-right'>");
         				
-        					out.println("<a href='#' class='dropdown-toggle' data-toggle='dropdown'><svg class='glyph stroked male-user'><use xlink:href='#stroked-male-user'></use></svg> Bruger <span class='caret'></span></a>");
+        					out.println("<a href='#' class='dropdown-toggle' data-toggle='dropdown'><svg class='glyph stroked male-user'><use xlink:href='#stroked-male-user'></use></svg>"+"Velkommen "+ user.getFullName() + "<span class='caret'></span></a>");
         						out.println("<ul class='dropdown-menu' role='menu'>");
         						out.println("<li><a href='#'><svg class='glyph stroked male-user'><use xlink:href='#stroked-male-user'></use></svg> Profil</a></li>");
         							out.println("<li><a href='#'><svg class='glyph stroked gear'><use xlink:href='#stroked-gear'></use></svg> Indstillinger</a></li>");
@@ -434,7 +440,8 @@ public class MenuServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		name = request.getParameter("name");
+		
+		
         processRequest(request, response);
 	}
 	

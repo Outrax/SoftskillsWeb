@@ -6,6 +6,7 @@
 <%@page import="Util.*" %>
 <%@page import="java.io.*" %>
 <%@page import="org.codehaus.jackson.map.*" %>
+<%@page import="org.apache.*" %>
 <%@ page import="java.util.Scanner,javax.xml.namespace.QName,javax.xml.ws.Service,java.net.URL,java.net.MalformedURLException" %>
 <!DOCTYPE html>
 <html>
@@ -107,7 +108,6 @@ input:hover {
           if (loggedin) {
         	 Firebase firebase = new Firebase();
         	 user = firebase.getUser(name);
-        	 System.out.println(user.getName());
         	  
         	  
               break;
@@ -122,10 +122,15 @@ out.println("<p>Du er nu logget ind</p>");
 <br>
                                                                                                     
 
-<%
-    String redirectURL = "MinServlet";
-    response.sendRedirect(redirectURL);
-%>
+<form method="POST" action="MinServlet">
+
+
+<input type="text" name="name" value="<%out.println(name);%>" readonly hidden/>
+
+<input type="submit" name="guessKnap" value="Forsæt til spillet">
+
+</form>
+
 <%
    
 }
