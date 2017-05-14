@@ -47,30 +47,6 @@ public class MenuServlet extends HttpServlet {
             QName qnameport = new QName("http://Service/", "ServermanagerPort");
             Service service = Service.create(url, qname);
             ServerI s = service.getPort(qnameport,ServerI.class);
-            
-
-
-//out.println("<!DOCTYPE html>");
-//out.println("<html>");
-//out.println("<head>");
-//
-//out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"stylesheet.css\">");
-//out.println("<title>Softskills Toolbox</title>");
-//out.println("</head>");
-//out.println("<body>");
-//out.println("<h1>Softskills Toolbox</h1>");
-//
-//out.println("</body>");
-//out.println("</html>");
-           
-            
-            
-            
-            
-            
-
-
-
 
         }
     }
@@ -83,7 +59,7 @@ public class MenuServlet extends HttpServlet {
 	
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		name = request.getParameter("name");
+		name = request.getParameter("user");
 		System.out.println("Navnet:" + name);
 		Firebase firebase = new Firebase();
    	 	User user = firebase.getUser(name);
@@ -146,9 +122,7 @@ public class MenuServlet extends HttpServlet {
         			out.println("</form>");
         		out.println("<ul class='nav menu'>");
         		out.println("<li class='active'><a href='MinServlet'><svg class='glyph stroked dashboard-dial'><use xlink:href='#stroked-dashboard-dial'></use></svg> Kontrolpanel</a></li>");
-        			out.println("<li><a href='ResultatServlet'><svg class='glyph stroked line-graph'><use xlink:href='#stroked-line-graph'></use></svg> Resultater</a></li>");
-        			out.println("<li><a href='panels.html'><svg class='glyph stroked app-window'><use xlink:href='#stroked-app-window'></use></svg> Alerts &amp; Panels</a></li>");
-        			out.println("<li><a href='icons.html'><svg class='glyph stroked star'><use xlink:href='#stroked-star'></use></svg> Icons</a></li>");
+        			out.println("<li><a href='ResultatServlet?user="+user.getEmail()+"'><svg class='glyph stroked line-graph'><use xlink:href='#stroked-line-graph'></use></svg> Resultater</a></li>");
         			out.println("<li role='presentation' class='divider'></li>");
         			
         			out.println("</ul>");
@@ -432,6 +406,8 @@ public class MenuServlet extends HttpServlet {
         		out.println("</body>");
 
         out.println("</html>");
+        
+        
 	}
 
 	/**
@@ -440,6 +416,7 @@ public class MenuServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		
 		
 		
         processRequest(request, response);

@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 
+import Entities.User;
+import Util.Firebase;
+
 /**
  * Servlet implementation class ResultatServlet
  */
@@ -49,6 +52,9 @@ public class ResultatServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
+		String bruger = request.getParameter("user");
+		Firebase firebase = new Firebase();
+   	 	User user = firebase.getUser(bruger);
 		//RequestDispatcher view = request.getRequestDispatcher("/Application/index.html");
         //view.forward(request, response);
 		
@@ -86,7 +92,7 @@ public class ResultatServlet extends HttpServlet {
 						out.println("<a class='navbar-brand' href='#'><span>Softskills</span>Backend</a>");
 						out.println("<ul class='user-menu'>");
 						out.println("<li class='dropdown pull-right'>");
-							out.println("<a href='#' class='dropdown-toggle' data-toggle='dropdown'><svg class='glyph stroked male-user'><use xlink:href='#stroked-male-user'></use></svg> Bruger <span class='caret'></span></a>");
+							out.println("<a href='#' class='dropdown-toggle' data-toggle='dropdown'><svg class='glyph stroked male-user'><use xlink:href='#stroked-male-user'></use></svg>"+"Velkommen "+user.getFullName()+"<span class='caret'></span></a>");
 								out.println("<ul class='dropdown-menu' role='menu'>");
 								out.println("<li><a href='#'><svg class='glyph stroked male-user'><use xlink:href='#stroked-male-user'></use></svg> Profil</a></li>");
 									out.println("<li><a href='#'><svg class='glyph stroked gear'><use xlink:href='#stroked-gear'></use></svg> Indstillinger</a></li>");
@@ -106,10 +112,8 @@ public class ResultatServlet extends HttpServlet {
 						out.println("</div>");
 					out.println("</form>");
 				out.println("<ul class='nav menu'>");
-				out.println("<li><a href='MinServlet'><svg class='glyph stroked dashboard-dial'><use xlink:href='#stroked-dashboard-dial'></use></svg> Kontrolpanel</a></li>");
+				out.println("<li><a href='MinServlet?user="+user.getEmail()+"'><svg class='glyph stroked dashboard-dial'><use xlink:href='#stroked-dashboard-dial'></use></svg> Kontrolpanel</a></li>");
 					out.println("<li class='active'><a href='ResultatServlet''><svg class='glyph stroked line-graph'><use xlink:href='#stroked-line-graph'></use></svg> Resultater</a></li>");
-					out.println("<li><a href='panels.html'><svg class='glyph stroked app-window'><use xlink:href='#stroked-app-window'></use></svg> Alerts &amp; Panels</a></li>");
-					out.println("<li><a href='icons.html'><svg class='glyph stroked star'><use xlink:href='#stroked-star'></use></svg> Icons</a></li>");
 					out.println("<li role='presentation' class='divider'></li>");
 					
 					out.println("</ul>");

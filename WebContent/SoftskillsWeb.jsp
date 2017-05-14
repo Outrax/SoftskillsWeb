@@ -16,49 +16,7 @@
        <title>Softskills Toolbox</title>
     </head>
     <body>
-    <style>
-/*        body {
-            background-color: #000000;
-            text-align: center;
-        }
-        h1 {
-            color:#20C20E;
-            font-family: Monospace;
-        }
-        p {
-            color:#20C20E;
-            margin-bottom: 2px;
-        }
-        #input2 {
-            margin-bottom: 10px
-        }
-        input {
-            background: #34d98f;
-            background-image: -webkit-linear-gradient(top, #34d98f, #2bb850);
-            background-image: -moz-linear-gradient(top, #34d98f, #2bb850);
-            background-image: -ms-linear-gradient(top, #34d98f, #2bb850);
-            background-image: -o-linear-gradient(top, #34d98f, #2bb850);
-  background-image: linear-gradient(to bottom, #34d98f, #2bb850);
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 28px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 20px;
-  padding: 10px 20px 10px 20px;
-  text-decoration: none;
-}
-input:hover {
-  background: #3cb0fd;
-  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-  text-decoration: none;
-}*/
-        
-    </style>
+    
     
     
 
@@ -117,20 +75,22 @@ input:hover {
                 out.println("<p>Forkert bruger eller password</p>");
             }
         }
-out.println("<p>Du er nu logget ind</p>");
+
 %>
 <br>
                                                                                                     
-
+<div class="form">
+<div class="login-form">
 <form method="POST" action="MinServlet">
+<p>Velkommen <%out.println(name);%></p>
 
+<input type="text" name="user" value="<%out.println(name);%>" readonly hidden/>
 
-<input type="text" name="name" value="<%out.println(name);%>" readonly hidden/>
-
-<input type="submit" name="guessKnap" value="Forsæt til spillet">
+<input type="submit" name="guessKnap" value="Gå til kontrolpanel">
 
 </form>
-
+</div>
+</div>
 <%
    
 }
